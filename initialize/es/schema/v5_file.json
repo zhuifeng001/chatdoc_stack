@@ -1,0 +1,73 @@
+{
+  "mappings": {
+    "properties": {
+      "company": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "created_at": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "doc_fragments_json": {
+        "type": "text",
+        "index": false
+      },
+      "extract_company_str": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "file_title": {
+        "type": "text"
+      },
+      "file_type": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "filename": {
+        "type": "text"
+      },
+      "first_image_id": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "keywords": {
+        "type": "text"
+      },
+      "kownledge_id": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "ori_type": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "page_number": {
+        "type": "integer"
+      },
+      "summary": {
+        "type": "text"
+      },
+      "tree_summaries": {
+        "type": "text"
+      },
+      "upload_time": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "uuid": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "year": {
+        "type": "keyword",
+        "ignore_above": 100
+      }
+    }
+  }
+}

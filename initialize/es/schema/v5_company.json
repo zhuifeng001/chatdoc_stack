@@ -1,0 +1,24 @@
+{
+  "mappings": {
+    "properties": {
+      "alias": {
+        "type": "text"
+      },
+      "created_at": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "eid": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "name": {
+        "type": "text"
+      },
+      "uuid": {
+        "type": "keyword",
+        "ignore_above": 100
+      }
+    }
+  }
+}

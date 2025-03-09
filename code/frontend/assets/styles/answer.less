@@ -1,0 +1,129 @@
+.chat-answer-content {
+  padding-left: 4px;
+  max-width: 100%;
+
+  p,
+  ol,
+  ul,
+  dl {
+    margin-bottom: 0;
+  }
+
+  ol,
+  ul,
+  dl {
+    padding-left: 20px;
+  }
+  pre code {
+    font-size: v-bind(fontSize);
+  }
+
+  sup,
+  sub {
+    margin: 0 4px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #e1e4eb;
+    border-radius: 50%;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+  }
+  sup {
+    top: -0.1em;
+  }
+  sub {
+    top: 0.1em;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  table {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+    border-spacing: 0;
+    border: 1px solid #666;
+    border-top-width: 0;
+
+    tbody {
+      white-space: nowrap;
+    }
+
+    th,
+    td {
+      padding: 5px 10px;
+      border: 1px solid #666;
+
+      border-left-width: 0;
+    }
+    th {
+      position: sticky;
+      top: -16px;
+      background: #fff;
+      vertical-align: bottom;
+    }
+
+    td {
+      border-bottom-width: 0;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right-width: 0;
+    }
+
+    tr:first-child td {
+      border-top-width: 0;
+    }
+  }
+}
+
+.chat-answer-table {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(174, 174, 184, 0.4) transparent;
+
+  &::-webkit-scrollbar {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 50px;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb:vertical {
+    height: 6px;
+    background-color: rgba(174, 174, 184, 0.4);
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb:horizontal {
+    width: 6px;
+    background-color: rgba(174, 174, 184, 0.4);
+    border-radius: 6px;
+  }
+}

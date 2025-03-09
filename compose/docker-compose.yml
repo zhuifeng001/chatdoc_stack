@@ -1,0 +1,231 @@
+services:
+  mysql:
+    image: mysql:5.7.44
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Pwd_250309
+    ports:
+      - 3307:3306
+    volumes:
+      - ../data/mysql/:/var/lib/mysql/
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+    networks:
+      - chatdoc
+
+  redis:
+    image: redis:7.0.0
+    restart: always
+    command: redis-server --requirepass Pwd_250309
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    networks:
+      - chatdoc
+  es01:
+    image: elasticsearch:8.12.0
+    container_name: es01
+    ports:
+      - 9200:9200
+    environment:
+      - node.name=es01
+      - cluster.name=chatdoc-docker-cluster
+      - cluster.initial_master_nodes=es01,es02,es03
+      - discovery.seed_hosts=es02,es03
+      - ELASTIC_PASSWORD=Pwd_250309
+      - bootstrap.memory_lock=false
+      - xpack.security.enabled=false
+    mem_limit: 2g
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ../data/es/01:/usr/share/elasticsearch/data
+    networks:
+      - chatdoc
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  es02:
+    depends_on:
+      - es01
+    container_name: es02
+    image: elasticsearch:8.12.0
+    environment:
+      - node.name=es02
+      - cluster.name=chatdoc-docker-cluster
+      - cluster.initial_master_nodes=es01,es02,es03
+      - discovery.seed_hosts=es01,es03
+      - ELASTIC_PASSWORD=Pwd_250309
+      - bootstrap.memory_lock=false
+      - xpack.security.enabled=false
+    mem_limit: 2g
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ../data/es/02:/usr/share/elasticsearch/data
+    networks:
+      - chatdoc
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  es03:
+    depends_on:
+      - es02
+    container_name: es03
+    image: elasticsearch:8.12.0
+    environment:
+      - node.name=es03
+      - cluster.name=chatdoc-docker-cluster
+      - cluster.initial_master_nodes=es01,es02,es03
+      - discovery.seed_hosts=es01,es02
+      - ELASTIC_PASSWORD=Pwd_250309
+      - bootstrap.memory_lock=false
+      - xpack.security.enabled=false
+    mem_limit: 2g
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ../data/es/03:/usr/share/elasticsearch/data
+    networks:
+      - chatdoc
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  chatdoc-proxy:
+    image: crpi-fzu683ul2d9e6wu3.cn-hangzhou.personal.cr.aliyuncs.com/intsig-chatdoc/chatdoc-proxy:open-v1.0.0 
+    container_name: chatdoc-proxy
+    restart: always
+    environment:
+      - ES_HOSTS=http://es01:9200|http://es02:9200|http://es03:9200
+      - ES_USERNAME=elastic
+      - ES_PASSWORD=Pwd_250309
+      - DATA_PATH=/data
+      - BASE_PATH=/app/config.yaml
+      - LOCATION_BASE_FILE_PATH=/data/file/
+      - ANALYST_QUERY_ANALYSIS_URL=http://query-analysis:30006/query_analysis
+      - LLM_MODEL=tyqwapi
+      - TYQWAPI_MODEL=deepseek-v3
+      - TYQWAPI_API_KEY=sk-998xxxx
+      - TEXTIN_APP_ID=xxxxx
+      - TEXTIN_APP_SECRET=xxxxx
+    volumes:
+      - ../data/chatdoc:/data
+    networks:
+      - chatdoc
+
+  chatdoc:
+    image: crpi-fzu683ul2d9e6wu3.cn-hangzhou.personal.cr.aliyuncs.com/intsig-chatdoc/chatdoc:open-v1.0.0
+    container_name: chatdoc
+    restart: always
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=7
+      - REDIS_PASSWORD=Pwd_250309
+      - ES_HOSTS=http://es01:9200|http://es02:9200|http://es03:9200
+      - ES_USERNAME=elastic
+      - ES_PASSWORD=Pwd_250309
+      - DATA_PATH=/data
+      - BASE_PATH=/app/config.yaml
+      - LOCATION_BASE_FILE_PATH=/data/file/
+      - PROXY_URL=http://chatdoc-proxy:8000
+      - BACKEND_PARSE_STATUS=http://backend:3000/api/v1/document/callback
+      - INFER_QUESTION_KEYWORD_URL=http://query-analysis:30006/query_analysis
+      - LLM_MODEL=tyqwapi
+      - TYQWAPI_MODEL=deepseek-v3
+      - TYQWAPI_API_KEY=sk-xxx
+      - PDF2MD_URL=https://api.textin.com/ai/service/v1/pdf_to_markdown
+      - TEXTIN_APP_ID=xxxxx
+      - TEXTIN_APP_SECRET=xxxxx
+    volumes:
+      - ../data/chatdoc:/data
+    networks:
+      - chatdoc
+      
+  # 后端
+  backend:
+    image: crpi-fzu683ul2d9e6wu3.cn-hangzhou.personal.cr.aliyuncs.com/intsig-chatdoc/backend:open-v1.0.0
+    container_name: backend
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - PROJECT_NAME=backend
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=gpt_qa
+      - MYSQL_PASSWORD=Pwd_250309
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=Pwd_250309
+      - UPLOAD_ADDRESS=http://chatdoc-proxy:8000/upload/
+      - DOWNLOAD_ADDRESS=http://chatdoc-proxy:8000/download/
+      - BACKEND_URL=http://chatdoc:5000
+      - BACKEND_NODE_URL=http://backend:3000
+      - CHATDOC_PROXY_URL=http://chatdoc-proxy:8000
+      - TEXTIN_DOWNLOAD_URL=https://api.textin.com/ocr_image/download
+      - MYSQL_TABLE_PREFIX=t_
+      - TEXTIN_APP_ID=xxxxx
+      - TEXTIN_APP_SECRET=xxxxx
+    ports:
+      - "0.0.0.0:48092:3000"
+    networks:
+      - chatdoc
+
+  frontend:
+    image: crpi-fzu683ul2d9e6wu3.cn-hangzhou.personal.cr.aliyuncs.com/intsig-chatdoc/frontend:open-v1.0.0
+    container_name: frontend
+    restart: always
+    environment:
+      # KB_API这个应设置为后端服务暴露的地址，域名或者可访问到 http://ip:port/api/v1/，例如http://chatdoc-backend-gateway.chatdoc.com/api/v1/
+      KB_API: http://127.0.0.1:48092/api/v1/
+      PORT: 3001
+    ports:
+      - "0.0.0.0:48091:3001"
+    networks:
+      - chatdoc
+
+  query-analysis:
+    image: crpi-fzu683ul2d9e6wu3.cn-hangzhou.personal.cr.aliyuncs.com/intsig-chatdoc/query-analysis:open-v1.0.0
+    container_name: query-analysis
+    restart: always
+    networks:
+      - chatdoc
+networks:
+  chatdoc:
+    driver: bridge

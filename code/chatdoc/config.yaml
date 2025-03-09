@@ -1,0 +1,142 @@
+es:
+  hosts: 'http://xxxx'
+  username: 'elastic'
+  password: 'xxxx'
+  index_p_doc_item: 'v5_p_doc_item'
+  index_p_doc_table: 'v5_p_doc_table'
+  index_p_doc_fragment: 'v5_p_doc_fragment'
+  index_p_file: 'v5_p_file'
+  index_company: 'v5_company'
+  index_doc_item: 'v5_doc_item'
+  index_doc_table: 'v5_doc_table'
+  index_doc_fragment: 'v5_doc_fragment'
+  index_file: 'v5_file'
+redis:
+  host: "xxxx"
+  port: 6379
+  db: 7
+  username: ''
+  password: 'xxxx'
+threadpool:
+  doc_process_worker: 4
+  doc_process_queue_size: 40
+  global_worker: 80 # embedding_concurrency
+proxy:
+  url: http://xxxx
+vector:
+  # 选择向量数据库 zilliz / tencent / es
+  model: es
+zilliz:
+  uri: https://xxx.tc-ap-shanghai.vectordb.zilliz.com.cn:443
+  token: xxxx
+  collection: test_rag_1024
+  p_collection: test_rag_1024_p
+  batch_size: 300
+  concurrency: 12
+tencent:
+  uri: http://tvdb.xxxx
+  username: root
+  key: xxx
+  database: db-test
+  collection: t_rag_1024
+  p_collection: t_p_rag_1024
+  batch_size: 100
+  concurrency: 30
+textin:
+  app_id: 'xxxx'
+  app_secret: 'xxxxx'
+  embedding_url: 'https://api.textin.com/ai/service/v1/acge_embedding'
+  rerank_url: 'https://api.textin.com/ai/service/v1/rerank'
+parse:
+  doc_parse_url: 'xxxx'
+  catalog_url: 'xxxx'
+  parse_concurrency: '10'
+  engine: 'pdf2md' # doc_parser / pdf2md
+retrieve:
+  fixed_table_keyword_threshold: 0.65
+  three_table_keyword_threshold: 0.8
+  # 层级top返回数
+  es_embedding_hierarchy_top_n: 1
+  es_keyword_title_top_n: 1
+  # paragraph节点embedding返回数
+  es_retriver_paragraphs_bm25_top_n: 20
+  es_retriver_paragraphs_top_n: 20
+  retrieval_top_n: 15
+  retrieval_max_length: 30000
+  # paragraph单个片段最长长度
+  retrieval_paragraph_flagment_max_length: 2000
+location:
+  base_file_path: '{BASE_DIR}/data/'
+  summary_cache_path: '{BASE_DIR}/__summary_cache__/'
+  base_doc_parse_path: '{BASE_DIR}/parse/doc-paser/parser-%s.json'
+  base_catalog_path: '{BASE_DIR}/parse/catalog/catalog-backend-%s.json'
+  base_frontend_catalog_path: '{BASE_DIR}/parse/catalog/catalog-%s.json'
+storage:
+  upload_address: 'xxxx'
+  download_address: 'xxxx'
+infer:
+  rough_rank_score: 0.9 # 检索粗排的top-p
+  re_rank_score: 0.9 # 答案洗排的top-p
+  question_keyword_url: 'http://xxxx'
+  openkie_url: 'xxxxx'
+backend:
+  node_url: 'http://xxxxx'
+  parse_status: 'http://xxxx'
+jaeger:
+  collector_url: 'xxxxx'
+  service_name: 'chatdoc'
+  agent_host_name: 'localhost'
+  exporter: 'none' # jaeger | console | none
+llm:
+  # 选择模型: gpt|tyqw|tyqwapi|chatglm|tianji|baichuan|kimichat|deepseek
+  model: deepseek
+gpt:
+  proxy: 'xxxxxx'
+  model: 'gpt-35-turbo-16k'
+tyqw:
+  url: 'xxxxx'
+  model: 'qwen2-57b-a14b-instruct'
+tyqwapi:
+  url: 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation'
+  model: qwen-plus-prem
+  api_key: sk-xxxxx
+deepseek:
+  url: 'https://api.deepseek.com/chat/completions'
+  model: 'deepseek-chat'
+  api_key: sk-xxxxx
+tianji:
+  url: 'http://chat7b.xxxx/generate'
+baichuan:
+  url: 'https://api.baichuan-ai.com/v1/chat/completions'
+  model: 'Baichuan3-Turbo-128k'
+  api_key: 'sk-xxxxx'
+kimichat:
+  url: 'https://api.moonshot.cn/v1/chat/completions'
+  model: 'moonshot-v1-32k'
+  api_key: 'sk-xxxxx'
+chatglm:
+  url: 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
+  model: 'glm-4'
+  # 个人账号，请勿乱用
+  api_key: 'xxxx'
+compliance:
+  # 测试环境：
+  text_url: 'http://xxxxxx/data_censor/v1/text_censor'
+  timeout: 60
+  # yidun | shumei
+  censors: shumei
+  warning_text: '抱歉，您的提问内容与本知识库无关，请重新提问，谢谢！'
+pdf2md:
+  url: https://api.textin.com/ai/service/v1/pdf_to_markdown
+  download_url: 'https://api.textin.com/ocr_image/download'
+  options_dpi: 144
+  options_page_start: 0
+  options_page_count: 2000
+  options_apply_document_tree: 1
+  options_markdown_details: 1
+  options_page_details: 1
+  options_table_flavor: 'html'
+  options_get_image: 'page'
+  options_parse_mode: scan
+  options_char_details: 1
+

@@ -1,0 +1,28 @@
+{
+  "mappings": {
+    "properties": {
+      "content": {
+        "type": "text"
+      },
+      "created_at": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "ori_id": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "titles": {
+        "type": "text"
+      },
+      "type": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "uuid": {
+        "type": "keyword",
+        "ignore_above": 100
+      }
+    }
+  }
+}

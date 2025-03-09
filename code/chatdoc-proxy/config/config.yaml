@@ -1,0 +1,48 @@
+es:
+  hosts: 'http://xxxxx'
+  username: 'elastic'
+  password: 'xxxxx'
+  index_company: 'v5_company'
+  index_doc_item: 'v5_doc_item'
+  index_doc_table: 'v5_doc_table'
+  index_doc_fragment: 'v5_doc_fragment'
+  index_p_doc_fragment: 'v5_p_doc_fragment'
+  index_file: 'v5_file'
+embedding:
+  batch_size: 32
+  parallels: 20
+zilliz:
+  uri: https://xxx.tc-ap-shanghai.vectordb.zilliz.com.cn:443
+  token: xxxxxx
+  collection: test_rag_1024
+  p_collection: test_rag_1024_p
+  batch_size: 300
+  parallels: 20
+tencent:
+  uri: http://tvdb.xxxx
+  username: root
+  key: xxxxxx
+  database: db-test
+  collection: t_rag_1024
+  p_collection: t_p_rag_1024
+  batch_size: 300
+  parallels: 20
+vector:
+  # 选择向量数据库 zilliz / tencent / es
+  model: es
+analyst:
+  query_analysis_url: 'http://xxxxx'
+textin:
+  # 生产环境
+  download_url: 'https://api.textin.com/ocr_image/download'
+  embedding_url: 'https://api.textin.com/ai/service/v1/acge_embedding'
+  user_id: '121xx'
+  app_id: 'xxxxx'
+  app_secret: 'xxxxx'
+  parallels: 12
+storage:
+  upload_address: 'xxxxx'
+  download_address: 'xxxxx'
+
+location:
+  base_file_path: '{BASE_DIR}/data/'

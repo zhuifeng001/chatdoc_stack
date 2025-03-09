@@ -1,0 +1,41 @@
+{
+	"name": "@intsig/canvas-mark",
+	"version": "1.0.62",
+	"license": "MIT",
+	"main": "libs/index.js",
+	"module": "libs/index.js",
+	"types": "libs/index.d.ts",
+	"scripts": {
+		"build": "rimraf dist && cross-env NODE_ENV=production rollup --config rollup.config.ts --configPlugin typescript",
+		"docs:dev": "vitepress dev docs",
+		"docs:build": "vitepress build docs",
+		"docs:preview": "vitepress preview docs"
+	},
+	"devDependencies": {
+		"@rollup/plugin-alias": "^5.0.0",
+		"@rollup/plugin-commonjs": "^25.0.4",
+		"@rollup/plugin-json": "^6.0.0",
+		"@rollup/plugin-node-resolve": "^15.2.1",
+		"@rollup/plugin-replace": "^5.0.2",
+		"@rollup/plugin-typescript": "^11.1.2",
+		"@types/lodash-es": "^4.17.9",
+		"@types/node": "^22.7.6",
+		"cross-env": "^7.0.3",
+		"fast-glob": "^3.3.1",
+		"prettier": "^3.0.2",
+		"rimraf": "^5.0.1",
+		"rollup": "^3.28.1",
+		"rollup-plugin-dts": "^6.0.0",
+		"rollup-plugin-terser": "^7.0.2",
+		"tslib": "^2.6.2",
+		"typescript": "^5.2.2",
+		"vitepress": "^1.0.0-rc.14",
+		"vue": "^3.3.4"
+	},
+	"dependencies": {
+		"@netless/canvas-polyfill": "^0.0.4",
+		"copy-to-clipboard": "^3.3.3",
+		"lodash-es": "^4.17.21",
+		"mitt": "^3.0.1"
+	}
+}

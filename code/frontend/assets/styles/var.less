@@ -1,0 +1,24 @@
+:root {
+  --text-color: #030a1a;
+  --text-gray-color: #757a85;
+  --text-gray-color2: #858c99;
+}
+
+.primary-color {
+  color: var(--primary-color);
+}
+
+.primary-color-hover {
+  cursor: pointer;
+  &:hover {
+    color: var(--primary-color) !important;
+  }
+}
+
+.ellipsis-1 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

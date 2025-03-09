@@ -1,0 +1,69 @@
+{
+  "mappings": {
+    "properties": {
+      "children_fragment_uuids": {
+        "type": "keyword"
+      },
+      "created_at": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "ebed_text": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "file_uuid": {
+        "type": "keyword"
+      },
+      "leaf": {
+        "type": "boolean"
+      },
+      "leaf_end_offset": {
+        "type": "integer"
+      },
+      "leaf_split_idx": {
+        "type": "integer"
+      },
+      "leaf_split_num": {
+        "type": "integer"
+      },
+      "leaf_start_offset": {
+        "type": "integer"
+      },
+      "level": {
+        "type": "integer"
+      },
+      "ori_id": {
+        "type": "keyword"
+      },
+      "parent_frament_uuid": {
+        "type": "keyword"
+      },
+      "table_end_row_idx": {
+        "type": "integer"
+      },
+      "table_start_row_idx": {
+        "type": "integer"
+      },
+      "table_title_row_idx": {
+        "type": "integer"
+      },
+      "token_length": {
+        "type": "integer"
+      },
+      "tree_token_length": {
+        "type": "integer"
+      },
+      "type": {
+        "type": "keyword"
+      },
+      "uuid": {
+        "type": "keyword"
+      },
+      "acge_embedding": {
+        "type": "dense_vector",
+        "dims": 1024
+      }
+    }
+  }
+}

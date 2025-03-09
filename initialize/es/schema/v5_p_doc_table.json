@@ -1,0 +1,37 @@
+{
+  "mappings": {
+    "properties": {
+      "created_at": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "ebed_text": {
+        "type": "text"
+      },
+      "keywords": {
+        "type": "text"
+      },
+      "ori_id": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "row_id": {
+        "type": "integer"
+      },
+      "title": {
+        "type": "text"
+      },
+      "type": {
+        "type": "keyword",
+        "ignore_above": 100
+      },
+      "user_id": {
+        "type": "keyword"
+      },
+      "uuid": {
+        "type": "keyword",
+        "ignore_above": 100
+      }
+    }
+  }
+}

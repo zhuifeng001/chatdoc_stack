@@ -1,0 +1,85 @@
+:root {
+  --primary-color: #1a66ff;
+  --secondary-color: #2f4dff;
+  --max-width: 1320px;
+  --min-width: 980px; // 1200 - 220(左侧导航)
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #1a66ff;
+    --secondary-color: #2f4dff;
+    --max-width: 1320px;
+    --min-width: 980px; // 1200 - 220(左侧导航)
+  }
+}
+
+html * {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: #fff;
+  color: #000;
+  font-family: Inter, 'Noto Sans CJK SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif, PingFang SC, PingFangSC-Regular,
+    -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-feature-settings: 'tnum';
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  margin: 0;
+}
+
+//后续需要更改
+// body {
+//   font-family: Inter, apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC,
+//     Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+// }
+
+svg {
+  outline: none;
+}
+
+svg[readonly] {
+  cursor: not-allowed !important;
+  color: #666 !important;
+}
+
+.ib,
+.ib .ib {
+  font-size: 0;
+  letter-spacing: -4px;
+}
+
+/* 新版firefox兼容 */
+
+@-moz-document url-prefix() {
+  .ib,
+  .ib .ib {
+    font-size: 0;
+    letter-spacing: 0;
+  }
+}
+
+.ib > div,
+.ib > label,
+.ib > a,
+.ib > span,
+.ib > li,
+.ib > input,
+.ib > ul,
+.ib > i {
+  display: inline-block;
+  font-size: 14px;
+  letter-spacing: 0;
+}
