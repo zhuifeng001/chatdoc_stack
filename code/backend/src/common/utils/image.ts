@@ -23,10 +23,10 @@ export const downloadTextinImage = async (imageId: string) => {
   // 兼容新的返回结构
   if (res.code == null) {
     res = res.data;
-    console.log('res.data 1', res.data);
+    // console.log('res.data 1', res.data);
   }
   if (res.code !== 200) {
-    console.log('res.data 2', res.data);
+    // console.log('res.data 2', res.data);
   }
   console.timeEnd(timeKey);
 
@@ -34,8 +34,8 @@ export const downloadTextinImage = async (imageId: string) => {
 };
 
 export const getStreamByTextinImage = async (imageId: string) => {
-  const streamRes = new Readable({ read() {} });
   const base64Str = await downloadTextinImage(imageId);
+  const streamRes = new Readable({ read() {} });
   setTimeout(() => {
     streamRes.push(Buffer.from(base64Str));
     streamRes.push(null);
