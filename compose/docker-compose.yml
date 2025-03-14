@@ -3,7 +3,7 @@ services:
     image: mysql:5.7.44
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: Pwd_250309
+      MYSQL_ROOT_PASSWORD: m@y#s!q$l
     ports:
       - 3307:3306
     volumes:
@@ -138,9 +138,9 @@ services:
       - ANALYST_QUERY_ANALYSIS_URL=http://query-analysis:30006/query_analysis
       - LLM_MODEL=tyqwapi
       - TYQWAPI_MODEL=deepseek-v3
-      - TYQWAPI_API_KEY=sk-998xxxx
-      - TEXTIN_APP_ID=xxxxx
-      - TEXTIN_APP_SECRET=xxxxx
+      - TYQWAPI_API_KEY=sk-508cd51bab934e058465a724e2c9413d
+      - TEXTIN_APP_ID=0c4d729130c42d4308f078768c07e60e
+      - TEXTIN_APP_SECRET=d8527943ceaecc7500e1cf054a84ccd7
     volumes:
       - ../data/chatdoc:/data
     networks:
@@ -166,10 +166,10 @@ services:
       - INFER_QUESTION_KEYWORD_URL=http://query-analysis:30006/query_analysis
       - LLM_MODEL=tyqwapi
       - TYQWAPI_MODEL=deepseek-v3
-      - TYQWAPI_API_KEY=sk-xxx
+      - TYQWAPI_API_KEY=sk-508cd51bab934e058465a724e2c9413d
       - PDF2MD_URL=https://api.textin.com/ai/service/v1/pdf_to_markdown
-      - TEXTIN_APP_ID=xxxxx
-      - TEXTIN_APP_SECRET=xxxxx
+      - TEXTIN_APP_ID=0c4d729130c42d4308f078768c07e60e
+      - TEXTIN_APP_SECRET=d8527943ceaecc7500e1cf054a84ccd7
     volumes:
       - ../data/chatdoc:/data
     networks:
@@ -189,7 +189,7 @@ services:
       - MYSQL_PORT=3306
       - MYSQL_USER=root
       - MYSQL_DATABASE=gpt_qa
-      - MYSQL_PASSWORD=Pwd_250309
+      - MYSQL_PASSWORD=m@y#s!q$l
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_PASSWORD=Pwd_250309
@@ -200,8 +200,8 @@ services:
       - CHATDOC_PROXY_URL=http://chatdoc-proxy:8000
       - TEXTIN_DOWNLOAD_URL=https://api.textin.com/ocr_image/download
       - MYSQL_TABLE_PREFIX=t_
-      - TEXTIN_APP_ID=xxxxx
-      - TEXTIN_APP_SECRET=xxxxx
+      - TEXTIN_APP_ID=0c4d729130c42d4308f078768c07e60e
+      - TEXTIN_APP_SECRET=d8527943ceaecc7500e1cf054a84ccd7
     ports:
       - "0.0.0.0:48092:3000"
     networks:
@@ -213,7 +213,7 @@ services:
     restart: always
     environment:
       # KB_API这个应设置为后端服务暴露的地址，域名或者可访问到 http://ip:port/api/v1/，例如http://chatdoc-backend-gateway.chatdoc.com/api/v1/
-      KB_API: http://127.0.0.1:48092/api/v1/
+      KB_API: http://115.190.85.207:48092/api/v1/
       PORT: 3001
     ports:
       - "0.0.0.0:48091:3001"

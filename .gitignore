@@ -1,0 +1,9 @@
+__summary_cache__
+.idea
+**/__pycache__
+**/*.pyc
+.vscode/
+.DS_Store
+*.jsonl
+temp.pdf
+temp.docx
