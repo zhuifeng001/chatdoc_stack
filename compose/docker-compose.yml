@@ -19,7 +19,7 @@ services:
   redis:
     image: redis:7.0.0
     restart: always
-    command: redis-server --requirepass Pwd_250309
+    command: redis-server --requirepass redis_250314
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -38,7 +38,7 @@ services:
       - cluster.name=chatdoc-docker-cluster
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es02,es03
-      - ELASTIC_PASSWORD=Pwd_250309
+      - ELASTIC_PASSWORD=redis_250314
       - bootstrap.memory_lock=false
       - xpack.security.enabled=false
     mem_limit: 2g
@@ -70,7 +70,7 @@ services:
       - cluster.name=chatdoc-docker-cluster
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es03
-      - ELASTIC_PASSWORD=Pwd_250309
+      - ELASTIC_PASSWORD=redis_250314
       - bootstrap.memory_lock=false
       - xpack.security.enabled=false
     mem_limit: 2g
@@ -102,7 +102,7 @@ services:
       - cluster.name=chatdoc-docker-cluster
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es02
-      - ELASTIC_PASSWORD=Pwd_250309
+      - ELASTIC_PASSWORD=redis_250314
       - bootstrap.memory_lock=false
       - xpack.security.enabled=false
     mem_limit: 2g
@@ -131,7 +131,7 @@ services:
     environment:
       - ES_HOSTS=http://es01:9200|http://es02:9200|http://es03:9200
       - ES_USERNAME=elastic
-      - ES_PASSWORD=Pwd_250309
+      - ES_PASSWORD=redis_250314
       - DATA_PATH=/data
       - BASE_PATH=/app/config.yaml
       - LOCATION_BASE_FILE_PATH=/data/file/
@@ -154,10 +154,10 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_DB=7
-      - REDIS_PASSWORD=Pwd_250309
+      - REDIS_PASSWORD=redis_250314
       - ES_HOSTS=http://es01:9200|http://es02:9200|http://es03:9200
       - ES_USERNAME=elastic
-      - ES_PASSWORD=Pwd_250309
+      - ES_PASSWORD=redis_250314
       - DATA_PATH=/data
       - BASE_PATH=/app/config.yaml
       - LOCATION_BASE_FILE_PATH=/data/file/
@@ -192,7 +192,7 @@ services:
       - MYSQL_PASSWORD=m@y#s!q$l
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_PASSWORD=Pwd_250309
+      - REDIS_PASSWORD=redis_250314
       - UPLOAD_ADDRESS=http://chatdoc-proxy:8000/upload/
       - DOWNLOAD_ADDRESS=http://chatdoc-proxy:8000/download/
       - BACKEND_URL=http://chatdoc:5000
