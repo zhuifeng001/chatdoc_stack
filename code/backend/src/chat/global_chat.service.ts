@@ -331,6 +331,7 @@ export class GlobalChatService {
     } catch (error) {
       await queryRunner.rollbackTransaction();
       result = error;
+      if (streamRes) streamRes.push(null);
     } finally {
       await queryRunner.release();
     }

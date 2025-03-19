@@ -304,8 +304,7 @@ export class DocumentService {
     if (folder.libraryId !== libraryId) {
       throw new NotFoundException(`libraryId不存在folderId为 ${folderId} 的文件夹`);
     }
-    const queryRunner = this.dataSource.createQueryRunner();
-    const documentCount = await queryRunner.manager.countBy(Document, {
+    const documentCount = await this.documentRepository.countBy({
       folderId: folderId,
       deleteTime: IsNull(),
     });

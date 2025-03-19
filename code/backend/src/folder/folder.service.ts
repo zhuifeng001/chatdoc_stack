@@ -61,8 +61,7 @@ export class FolderService {
       userId: createFolder.userId,
     };
 
-    const queryRunner = this.dataSource.createQueryRunner();
-    const folderCount = await queryRunner.manager.countBy(Folder, {
+    const folderCount = await this.folderRepository.countBy({
       userId: createFolder.userId,
       deleteTime: IsNull(),
     });
