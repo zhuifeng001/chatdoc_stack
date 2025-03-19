@@ -3,7 +3,7 @@ services:
     image: mysql:5.7.44
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: m@y#s!q$l
+      MYSQL_ROOT_PASSWORD: Pwd_250309
     ports:
       - 3307:3306
     volumes:
@@ -19,7 +19,7 @@ services:
   redis:
     image: redis:7.0.0
     restart: always
-    command: redis-server --requirepass redis_250314
+    command: redis-server --requirepass Pwd_250309
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -38,7 +38,7 @@ services:
       - cluster.name=chatdoc-docker-cluster
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es02,es03
-      - ELASTIC_PASSWORD=redis_250314
+      - ELASTIC_PASSWORD=Pwd_250309
       - bootstrap.memory_lock=false
       - xpack.security.enabled=false
     mem_limit: 2g
@@ -70,7 +70,7 @@ services:
       - cluster.name=chatdoc-docker-cluster
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es03
-      - ELASTIC_PASSWORD=redis_250314
+      - ELASTIC_PASSWORD=Pwd_250309
       - bootstrap.memory_lock=false
       - xpack.security.enabled=false
     mem_limit: 2g
@@ -102,7 +102,7 @@ services:
       - cluster.name=chatdoc-docker-cluster
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es02
-      - ELASTIC_PASSWORD=redis_250314
+      - ELASTIC_PASSWORD=Pwd_250309
       - bootstrap.memory_lock=false
       - xpack.security.enabled=false
     mem_limit: 2g
@@ -131,14 +131,14 @@ services:
     environment:
       - ES_HOSTS=http://es01:9200|http://es02:9200|http://es03:9200
       - ES_USERNAME=elastic
-      - ES_PASSWORD=redis_250314
+      - ES_PASSWORD=Pwd_250309
       - DATA_PATH=/data
       - BASE_PATH=/app/config.yaml
       - LOCATION_BASE_FILE_PATH=/data/file/
       - ANALYST_QUERY_ANALYSIS_URL=http://query-analysis:30006/query_analysis
       - LLM_MODEL=tyqwapi
       - TYQWAPI_MODEL=deepseek-v3
-      - TYQWAPI_API_KEY=sk-508cd51bab934e058465a724e2c9413d
+      - TYQWAPI_API_KEY=sk-195017a61e6c4d74a23502008775f06d
       - TEXTIN_APP_ID=0c4d729130c42d4308f078768c07e60e
       - TEXTIN_APP_SECRET=d8527943ceaecc7500e1cf054a84ccd7
     volumes:
@@ -154,10 +154,10 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_DB=7
-      - REDIS_PASSWORD=redis_250314
+      - REDIS_PASSWORD=Pwd_250309
       - ES_HOSTS=http://es01:9200|http://es02:9200|http://es03:9200
       - ES_USERNAME=elastic
-      - ES_PASSWORD=redis_250314
+      - ES_PASSWORD=Pwd_250309
       - DATA_PATH=/data
       - BASE_PATH=/app/config.yaml
       - LOCATION_BASE_FILE_PATH=/data/file/
@@ -166,7 +166,7 @@ services:
       - INFER_QUESTION_KEYWORD_URL=http://query-analysis:30006/query_analysis
       - LLM_MODEL=tyqwapi
       - TYQWAPI_MODEL=deepseek-v3
-      - TYQWAPI_API_KEY=sk-508cd51bab934e058465a724e2c9413d
+      - TYQWAPI_API_KEY=sk-195017a61e6c4d74a23502008775f06d
       - PDF2MD_URL=https://api.textin.com/ai/service/v1/pdf_to_markdown
       - TEXTIN_APP_ID=0c4d729130c42d4308f078768c07e60e
       - TEXTIN_APP_SECRET=d8527943ceaecc7500e1cf054a84ccd7
@@ -189,10 +189,10 @@ services:
       - MYSQL_PORT=3306
       - MYSQL_USER=root
       - MYSQL_DATABASE=gpt_qa
-      - MYSQL_PASSWORD=m@y#s!q$l
+      - MYSQL_PASSWORD=Pwd_250309
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_PASSWORD=redis_250314
+      - REDIS_PASSWORD=Pwd_250309
       - UPLOAD_ADDRESS=http://chatdoc-proxy:8000/upload/
       - DOWNLOAD_ADDRESS=http://chatdoc-proxy:8000/download/
       - BACKEND_URL=http://chatdoc:5000
@@ -213,7 +213,7 @@ services:
     restart: always
     environment:
       # KB_API这个应设置为后端服务暴露的地址，域名或者可访问到 http://ip:port/api/v1/，例如http://chatdoc-backend-gateway.chatdoc.com/api/v1/
-      KB_API: http://115.190.85.207:48092/api/v1/
+      KB_API: http://115.190.85.207:48092
       PORT: 3001
     ports:
       - "0.0.0.0:48091:3001"
